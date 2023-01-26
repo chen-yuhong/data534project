@@ -4,3 +4,4 @@
 | Date | Contents | Signature
 | ------ | ------ |  ------ |
 | 2022-01-15 | project proposal discussion | Xiaoxiao Fu, Yuhong Chen
+| 2022-01-26 | project proposal revised | Xiaoxiao Fu, Yuhong Chen
