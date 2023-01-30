@@ -72,3 +72,18 @@ class APRA():
         self.Button.place(x=300,y=200)
         
         self.Master.mainloop()
+        
+    #get user's inputs and create url for it
+    def return_url(self):
+        #get value from api_key_entry
+        self.api=self.api_key_entry.get()
+        
+        #get value from asin_entry
+        self.asin=self.asin_entry.get()
+        
+        #get value from domain_opt in menu bar
+        self.domain=self.domain_opt.get()
+        
+        #create url
+        self.url="https://api.asindataapi.com/request?api_key="+self.api+"&type=reviews&amazon_domain="+self.domain+"&asin="+self.asin+"&review_stars=one_star&sort_by=most_helpful"
+        return self.url
