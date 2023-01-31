@@ -1,4 +1,4 @@
-# APRA (AMAZON PRODUCT REVIEW ANALYSIS) DESCRIPTIONS [![Build Status](https://app.travis-ci.com/chen-yuhong/DATA533-step3.svg?branch=main)](https://app.travis-ci.com/chen-yuhong/DATA533-step3)
+# APRA (AMAZON PRODUCT REVIEW ANALYSIS) DESCRIPTIONS [![Build Status](https://app.travis-ci.com/chen-yuhong/data534project.svg?branch=main)](https://app.travis-ci.com/chen-yuhong/data534project)
 ### Amazon Product Review Analysis
 The purpose of this review analysis application is to retrieve and display up to 10 keywords in one-star reviews, using the APIs provided by www.asindataapi.com Throughout this application, you’ll see that we’ve created API calls and classes to retrieve lists of the top 10 most helpful one-star reviews (which you can use to filter for specific amazon domain) and the top 10 most representative negative adjectives. 
 
