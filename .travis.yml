@@ -1,0 +1,7 @@
+  language: python
+  install:
+    - pip install requests
+    - pip install nltk
+    - pip install BeautifulSoup4
+  script:
+    - python test/suite.py
