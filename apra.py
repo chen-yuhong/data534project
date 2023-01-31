@@ -104,3 +104,77 @@ class APRA():
         #create url
         self.url="https://api.asindataapi.com/request?api_key="+self.api+"&type=reviews&amazon_domain="+self.domain+"&asin="+self.asin+"&review_stars=one_star&sort_by=most_helpful"
         return self.url
+    def clean_content(self):
+        self.out1.config(text="")
+        self.out2.config(text="")
+        self.out3.config(text="")
+    
+    def get_review(self):
+        #call return url function
+        self.return_url()
+        
+        #create a request for url
+        api_request=requests.get(self.url)
+        
+        #convert the request to json
+        to_json=json.dumps(api_request.json())
+        
+        #use beautiful soup to access data
+        soup=BeautifulSoup(to_json)
+        
+        #get the text
+        site_json=json.loads(soup.text)
+        
+        #raise exception when access failed
+        if site_json['request_info']['success']==False:
+            
+            #API key is incorrect
+            if site_json['request_info']['message']=='Supplied api_key is not valid':
+                #create a label and output the error message on the window
+                self.clean_content()
+                self.warn=Label(text="Sorry, API key is not valid",fg="red")
+                self.warn.place(x=110, y=200)
+                raise Exception("API key is not valid")
+                
+            
+            #No ASIN entered
+            elif site_json['request_info']['message']=="'asin' or 'gtin' parameter must be present when 'url' is not supplied.":
+                #create a label and output the error message on the window
+                self.clean_content()
+                self.warn.config(text="Sorry, ASIN is not valid",fg="red")
+                raise Exception("Sorry, ASIN is not valid")
+                
+            #amazon domain is not found
+            elif site_json['request_info']['message']=="'amazon_domain' parameter is invalid - for supported Amazon domains visit https://www.asindataapi.com/docs/product-data-api/reference/amazon-domains":
+                #create a label and output the error message on the window
+                self.clean_content()
+                self.warn.config(text="Sorry, domain is not valid",fg="red")
+                raise Exception("Sorry, domain is not valid")
+                
+                
+            #ASIN is not found
+            elif site_json['request_info']['http_status_code']==404:
+                #create a label and output the error message on the window
+                self.clean_content()
+                self.warn.config(text="Sorry, ASIN is not valid",fg="red")
+                raise Exception("Sorry, ASIN is not valid")
+                
+                
+        if site_json['request_info']['success']==True:
+            #raise exception when there is no bad review
+            if site_json['summary']['rating_breakdown']['one_star']['count']==0:
+                #create a label and output the error message on the window
+                self.clean_content()
+                self.warn.config(text="No bad review for this product",fg="red")
+                raise Exception("No bad review for this product")
+            else:
+                #get all the reviews
+                self.review=[i.get('body') for i in site_json['reviews'] if i.get('body')]
+                #get the rating score
+                self.score=site_json['summary']['rating']
+                #get the one_star review count
+                self.one_star_count=site_json['summary']['rating_breakdown']['one_star']['count']
+                #get the one_star review percentage
+                self.one_star_percentage=site_json['summary']['rating_breakdown']['one_star']['percentage']
+        
+        return self.review, self.score, self.one_star_count, self.one_star_percentage
