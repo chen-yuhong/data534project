@@ -1,0 +1,9 @@
+  language: python
+  python:
+    - "3.10"
+  install:
+    - pip3.10 install requests
+    - pip3.10 install nltk
+    - pip3.10 install BeautifulSoup4
+  script:
+    - python test/suite.py
