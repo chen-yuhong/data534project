@@ -9,3 +9,4 @@
 | 2022-01-29 | design the structure of the package| Xiaoxiao Fu, Yuhong Chen
 | 2022-01-30 | initial class| Yuhong Chen
 | 2022-01-30 | function return_url| Xiaoxiao Fu
+| 2022-01-30 | function clean_content & get_review & readme.md| Yuhong Chen
