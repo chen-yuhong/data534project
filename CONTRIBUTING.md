@@ -1,7 +1,7 @@
 # Contributions Document
 
 ##### Yuhong's main contributions for the project
-- create function: clean_content, get_review
+- create function: clean_content, get_review including raise exceptions
 - readme.md
 - LICENSE
 - unittest, coverage report, CI
