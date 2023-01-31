@@ -108,7 +108,9 @@ class APRA():
         self.out1.config(text="")
         self.out2.config(text="")
         self.out3.config(text="")
-    
+        for i in range(10):
+            self.labels[i].config(text="")
+            
     def get_review(self):
         #call return url function
         self.return_url()
