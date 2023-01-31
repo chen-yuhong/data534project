@@ -180,3 +180,65 @@ class APRA():
                 self.one_star_percentage=site_json['summary']['rating_breakdown']['one_star']['percentage']
         
         return self.review, self.score, self.one_star_count, self.one_star_percentage
+    #remove special characters and numbers
+    def clean_text(self,lst):
+        for i in range(len(lst)):
+            lst[i]=re.sub('[^A-Za-z]+', ' ', lst[i])
+        return lst
+    
+    #extract negative words from the review
+    def negative_words(self):
+        #call get_review function
+        self.get_review()
+        
+        #clean the review data which only includes alphabets
+        lst_to_str=self.clean_text(self.review)
+        
+        #split the result into words list
+        review_collection=(''.join(lst_to_str)).split(' ')
+        
+        #call SentimentIntensityAnalyzer
+        sid = SentimentIntensityAnalyzer()
+        
+        #create a neg_word_list
+        neg_word_list=[]
+        
+        #collect words whose compound value is smaller or equal to -0.1
+        for word in review_collection:
+            if (sid.polarity_scores(word)['compound']) <= -0.1:
+                neg_word_list.append(word)
+        
+        #create a dictionary that records the frequency of each negative word in neg_word_list
+        count={}
+        for key in neg_word_list:
+            count[key]=count.get(key,0)+1
+        
+        #Sort by the word that appears most frequently
+        self.result=sorted(count, key=count.get, reverse=True)[:10]
+        return self.result
+        
+    #output the result
+    def output_result(self):
+        #call negative_words function
+        self.negative_words()
+        self.warn.config(text="")
+        #create labels
+        self.out1.config(text="------------------------------------- \nProduct Rating: "+str(self.score)+" out of 5")
+        self.out2.config(text="Number of one-star reviews: "+
+              str(self.one_star_count)+" (" +str(self.one_star_percentage)+
+              "%) \n-------------------------------------")
+        self.out3.config(text="Top Keywords in Bad Revewis:",font=('Arial', 20))
+        
+                
+        #if the length of negative words list is smaller than 10, output all words
+        if len(self.result)<10:
+            for i in range(len(self.result)):
+                self.labels[i].config(text=self.result[i])
+            for i in range(len(self.result),10):
+                self.labels[i].config(text="")
+        
+        #else output top 10 words
+        else:
+            for i in range(10):
+                self.labels[i].config(text=self.result[i])
+
