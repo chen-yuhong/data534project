@@ -22,8 +22,20 @@ Please notice that the free account only has 100 free requests trials
 5. Enter product ASIN number (Each product on amazon has own unique ASIN number)
 6. Click ```Submit``` button
 
+### success case (all correct inputs)
+![alt text](https://github.com/chen-yuhong/data534project/blob/yuhong/screenshots/success.png)
 
+### amazon domain error case 
+![alt text](https://github.com/chen-yuhong/data534project/blob/yuhong/screenshots/domain%20error.png)
 
+### api key error case 
+![alt text](https://github.com/chen-yuhong/data534project/blob/yuhong/screenshots/api_key_error.png)
+
+### asin number error case
+![alt text](https://github.com/chen-yuhong/data534project/blob/yuhong/screenshots/asin_error.png)
+
+### no one-star review error case
+![alt text](https://github.com/chen-yuhong/data534project/blob/yuhong/screenshots/no_bad_review_error.png)
 
 ### apra
 | FUNCTION NAME | DESCRIPTIONS |
