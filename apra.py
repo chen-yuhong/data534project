@@ -20,7 +20,7 @@ class APRA():
         self.Master.geometry("400x600+374+182")
         
         #create a logo
-        self.Label=Label(
+        self.logo=Label(
            text="APRA",
            font=('Arial', 30),
            fg="orange",
@@ -38,7 +38,7 @@ class APRA():
         self.domain_label=Label(text="Amazon Domain:").place(x=50, y=100)
         
         #option list for menu bar
-        options_list = ["amazon.com", "amazon.ca", "amazon.com.au","amazon.co.uk"]
+        self.options_list = ["amazon.com", "amazon.ca", "amazon.com.au","amazon.co.uk"]
         
         #create string variable
         self.domain_opt = StringVar(self.Master)
@@ -47,21 +47,23 @@ class APRA():
         self.domain_opt.set("Select an amazon domain")
         
         #create domain selection menu bar
-        question_menu = OptionMenu(self.Master, self.domain_opt, *options_list)
+        question_menu = OptionMenu(self.Master, self.domain_opt, *self.options_list)
         question_menu.place(x=170,y=100)
         
         #craete a string variable
         self.url=StringVar()
         
         #create a api key lable
-        self.api_label=Label(text="API Key:").place(x=50, y=134)
+        self.api_label=Label(text="API Key:")
+        self.api_label.place(x=50, y=134)
         
         #create api key entry for user to input
         self.api_key_entry=Entry(self.Master)
         self.api_key_entry.place(x=110, y=130)
         
         #create asin lable
-        self.asin_label=Label(text="ASIN #:").place(x=50, y=165)
+        self.asin_label=Label(text="ASIN #:")
+        self.asin_label.place(x=50, y=165)
         
         #create asin entry for user to input
         self.asin_entry=Entry(self.Master)
@@ -71,7 +73,22 @@ class APRA():
         self.Button=Button(self.Master,text="Submit",command=self.output_result)
         self.Button.place(x=300,y=200)
         
-        self.Master.mainloop()
+        self.warn=Label(text="",fg="red")
+        self.warn.place(x=110, y=200)
+        self.out1=Label(text="")
+        self.out1.place(x=50, y=200)
+        self.out2=Label(text="")
+        self.out2.place(x=50, y=240)
+        self.out3=Label(text="",font=('Arial', 20))
+        self.out3.place(x=50, y=300)
+        
+        self.labels=[]
+        for i in range(10):
+            self.labels.append(Label(text=""))
+            self.labels[i].place(x=50, y=330+i*20)
+        
+            
+        #self.Master.mainloop()
         
     #get user's inputs and create url for it
     def return_url(self):
