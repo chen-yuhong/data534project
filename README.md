@@ -14,10 +14,15 @@ Check out the API documentation:https://www.asindataapi.com/docs
 Please notice that the free account only has 100 free requests trials
   
 2. Run ```play.py``` file
+
+![alt text](https://github.com/chen-yuhong/data534project/blob/yuhong/screenshots/step1.png)
+
 3. Select Amazon Domain from the menu bar (US, Canada, UK, Australia)
 4. Enter API Key
 5. Enter product ASIN number (Each product on amazon has own unique ASIN number)
 6. Click ```Submit``` button
+
+
 
 
 ### apra
